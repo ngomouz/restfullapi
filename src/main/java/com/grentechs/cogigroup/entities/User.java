@@ -1,6 +1,7 @@
 package com.grentechs.cogigroup.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 @Entity
@@ -10,16 +11,28 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty(message = "The username is mandatory")
     @Column(name = "username", length = 50, unique = true, nullable = false)
     private String username;
+
+    @Size(min = 2, message = "The firstname should have atleast 2 caracteres")
     @Column(name = "firstname", length = 50, nullable = false)
     private String firstname;
+
+    @Size(min = 2, message = "The firstname should have atleast 2 caracteres")
     @Column(name = "lastname", length = 50, nullable = false)
     private String lastname;
+
+    @Email(message = "Kindly provide a valid email")
     @Column(name = "email", length = 50, unique = true, nullable = false)
     private String email;
+
     @Column(name = "role", length = 50, nullable = false)
     private String role;
+
+    @NotEmpty
+    @NotBlank
     @Column(name = "ssn", length = 50, nullable = false)
     private String ssn;
 
