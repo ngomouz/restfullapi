@@ -40,4 +40,16 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         CustomErrorDetails customErrorDetails = new CustomErrorDetails(LocalDateTime.now(), exception.getMessage().toUpperCase(), request.getDescription(false));
         return new ResponseEntity<>(customErrorDetails, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(value = UserNotFoundException.class)
+    protected final ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception, WebRequest request) {
+        CustomErrorDetails customErrorDetails = new CustomErrorDetails(LocalDateTime.now(), exception.getMessage().toUpperCase(), request.getDescription(false));
+        return new ResponseEntity<>(customErrorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = OrderNotFoundException.class)
+    protected final ResponseEntity<Object> handleOrderNotFoundException(OrderNotFoundException exception, WebRequest request) {
+        CustomErrorDetails customErrorDetails = new CustomErrorDetails(LocalDateTime.now(), exception.getMessage().toUpperCase(), request.getDescription(false));
+        return new ResponseEntity<>(customErrorDetails, HttpStatus.BAD_REQUEST);
+    }
 }

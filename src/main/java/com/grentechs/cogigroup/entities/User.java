@@ -3,6 +3,8 @@ package com.grentechs.cogigroup.entities;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
@@ -35,6 +37,9 @@ public class User implements Serializable {
     @NotBlank
     @Column(name = "ssn", length = 50, nullable = false)
     private String ssn;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders = new HashSet<>();
 
     public User() {
     }
@@ -102,6 +107,14 @@ public class User implements Serializable {
 
     public void setSsn(String ssn) {
         this.ssn = ssn;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
