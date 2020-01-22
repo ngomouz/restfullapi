@@ -3,7 +3,6 @@ package com.grentechs.cogigroup.services;
 import com.grentechs.cogigroup.entities.User;
 import com.grentechs.cogigroup.exceptions.UserExistsException;
 import com.grentechs.cogigroup.exceptions.UserNotFoundException;
-import com.grentechs.cogigroup.exceptions.UsernameNotFoundException;
 import com.grentechs.cogigroup.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +44,7 @@ public class UserService {
         if(!optionalUser.isPresent()) {
             throw new UserNotFoundException("USER NOT FOUND");
         }
-        user.setId(id);
+        user.setUserId(id);
         return userRepository.save(user);
     }
 

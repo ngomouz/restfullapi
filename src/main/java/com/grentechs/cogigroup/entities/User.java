@@ -1,18 +1,23 @@
 package com.grentechs.cogigroup.entities;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "User")
-public class User implements Serializable {
+public class User extends ResourceSupport implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
 
     @NotEmpty(message = "The username is mandatory")
     @Column(name = "username", length = 50, unique = true, nullable = false)
@@ -53,12 +58,12 @@ public class User implements Serializable {
         this.ssn = ssn;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -120,7 +125,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-            "id=" + id +
+            "userId=" + userId +
             ", username='" + username + '\'' +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +

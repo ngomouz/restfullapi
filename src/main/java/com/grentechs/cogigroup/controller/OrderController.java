@@ -6,6 +6,8 @@ import com.grentechs.cogigroup.exceptions.OrderNotFoundException;
 import com.grentechs.cogigroup.exceptions.UserNotFoundException;
 import com.grentechs.cogigroup.repositories.OrderRepository;
 import com.grentechs.cogigroup.repositories.UserRepository;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +36,6 @@ public class OrderController {
         if(!user.isPresent()) {
             throw new UserNotFoundException("USER NOT FOUND");
         }
-
         return new ArrayList<>(user.get().getOrders());
     }
 
