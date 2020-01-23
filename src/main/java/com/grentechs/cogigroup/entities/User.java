@@ -1,5 +1,6 @@
 package com.grentechs.cogigroup.entities;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
@@ -13,6 +14,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "User")
+@JsonFilter(value = "userFilter")
+// @JsonIgnoreProperties({"firstname", "lastname"})
 public class User extends ResourceSupport implements Serializable {
 
     @Id
@@ -40,6 +43,7 @@ public class User extends ResourceSupport implements Serializable {
 
     @NotEmpty
     @NotBlank
+    // @JsonIgnore
     @Column(name = "ssn", length = 50, nullable = false)
     private String ssn;
 
