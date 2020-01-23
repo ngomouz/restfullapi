@@ -1,6 +1,7 @@
 package com.grentechs.cogigroup.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
@@ -12,8 +13,10 @@ public class Order extends ResourceSupport implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(value = Views.Internal.class)
     private Long orderId;
 
+    @JsonView(value = Views.Internal.class)
     private String orderdescription;
 
     @JsonIgnore

@@ -1,6 +1,7 @@
 package com.grentechs.cogigroup.entities;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
@@ -14,22 +15,26 @@ import java.util.Set;
 
 @Entity
 @Table(name = "User")
-@JsonFilter(value = "userFilter")
-// @JsonIgnoreProperties({"firstname", "lastname"})
+// @JsonFilter(value = "userFilter") -- For Filtering fields
+// @JsonIgnoreProperties({"firstname", "lastname"}) -- for @JsonIgnore
 public class User extends ResourceSupport implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(value = Views.External.class)
     private Long userId;
 
+    @JsonView(value = Views.External.class)
     @NotEmpty(message = "The username is mandatory")
     @Column(name = "username", length = 50, unique = true, nullable = false)
     private String username;
 
+    @JsonView(value = Views.External.class)
     @Size(min = 2, message = "The firstname should have atleast 2 caracteres")
     @Column(name = "firstname", length = 50, nullable = false)
     private String firstname;
 
+    @JsonView(value = Views.External.class)
     @Size(min = 2, message = "The firstname should have atleast 2 caracteres")
     @Column(name = "lastname", length = 50, nullable = false)
     private String lastname;
@@ -38,16 +43,18 @@ public class User extends ResourceSupport implements Serializable {
     @Column(name = "email", length = 50, unique = true, nullable = false)
     private String email;
 
+    @JsonView(value = Views.Internal.class)
     @Column(name = "role", length = 50, nullable = false)
     private String role;
 
     @NotEmpty
     @NotBlank
-    // @JsonIgnore
+    @JsonView(value = Views.Internal.class)
     @Column(name = "ssn", length = 50, nullable = false)
     private String ssn;
 
     @OneToMany(mappedBy = "user")
+    @JsonView(value = Views.Internal.class)
     private Set<Order> orders = new HashSet<>();
 
     public User() {
