@@ -1,6 +1,5 @@
 package com.grentechs.cogigroup.entities;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -39,6 +38,9 @@ public class User extends ResourceSupport implements Serializable {
     @Column(name = "lastname", length = 50, nullable = false)
     private String lastname;
 
+    @Column(name = "adress", nullable = true)
+    private String adress;
+
     @Email(message = "Kindly provide a valid email")
     @Column(name = "email", length = 50, unique = true, nullable = false)
     private String email;
@@ -60,11 +62,12 @@ public class User extends ResourceSupport implements Serializable {
     public User() {
     }
 
-    public User(String username, String firstname, String lastname, String email, String role, String ssn) {
+    public User(String username, String firstname, String lastname, String email, String role, String ssn, String adress) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.adress = adress;
         this.role = role;
         this.ssn = ssn;
     }
@@ -131,6 +134,14 @@ public class User extends ResourceSupport implements Serializable {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
     @Override

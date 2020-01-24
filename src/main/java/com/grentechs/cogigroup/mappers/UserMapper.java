@@ -1,5 +1,7 @@
 package com.grentechs.cogigroup.mappers;
 
+import com.grentechs.cogigroup.dtos.UserDtoV1;
+import com.grentechs.cogigroup.dtos.UserDtoV2;
 import com.grentechs.cogigroup.dtos.UserMsDto;
 import com.grentechs.cogigroup.entities.User;
 import org.mapstruct.Mapper;
@@ -20,7 +22,13 @@ public interface UserMapper {
         @Mapping(source = "role", target = "rolename"),
         @Mapping(source = "orders", target = "userOrders")
     })
-    UserMsDto userToUserMsDto(User user);
+    UserMsDto userToUserMsDto(User user);// User to UserMsDto
+
+    @Mapping(source = "orders", target = "orders")
+    UserDtoV1 userToUserDtoV1(User user);
+
+    @Mapping(source = "orders", target = "orders")
+    UserDtoV2 userToUserDtoV2(User user);
 
     // List<User> To List<UserMsDto>
     List<UserMsDto> usersToUserMsDtos(List<User> users);
