@@ -6,8 +6,8 @@ import com.grentechs.cogigroup.exceptions.OrderNotFoundException;
 import com.grentechs.cogigroup.exceptions.UserNotFoundException;
 import com.grentechs.cogigroup.repositories.OrderRepository;
 import com.grentechs.cogigroup.repositories.UserRepository;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @Validated
 @RestController
 @RequestMapping(path = "/users")
+@Api(tags = "Order Management Service RESTful Services", value = "OrderController")
 public class OrderController {
 
     private final UserRepository userRepository;
@@ -31,6 +32,7 @@ public class OrderController {
     }
 
     @GetMapping(path = "/getAllOreders/{userId}/orders")
+    @ApiOperation(value = "Get all orders of a specific User")
     public List<Order> getAllOreders(@PathVariable(value = "userId") Long userId) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(userId);
         if(!user.isPresent()) {
